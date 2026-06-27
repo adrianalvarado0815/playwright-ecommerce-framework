@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test('agents abilities', async ({ page }) => {
   await page.goto('https://playvalorant.com/es-mx/');
+  await page.getByTestId('riotbar:desktopNav:link-internal-game-info').click();
   await page.getByTestId('riotbar:desktopNav:link-AGENTES').click();
   await page.getByRole('button', { name: 'Cypher' }).click();
   await page.getByTestId('icon-tab-tab-1').click();
