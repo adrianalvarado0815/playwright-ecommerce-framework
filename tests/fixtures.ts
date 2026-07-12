@@ -1,9 +1,11 @@
 import { test as base } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
+import { ProductsPage } from '../pages/ProductsPage';
 
 // 1. Define the types for your custom fixtures
 type MyFixtures = {
   loginPage: LoginPage;
+  productsPage: ProductsPage;
   // Future page objects will be added here (e.g., productsPage: ProductsPage;)
 };
 
@@ -14,10 +16,12 @@ export const test = base.extend<MyFixtures>({
   loginPage: async ({ page }, use) => {
     // Instantiate the page object
     const loginPage = new LoginPage(page);
-    
-    // Pass the fixture to the test execution
     await use(loginPage);
   },
+  productsPage: async({page}, use) => {
+    const productsPage = new ProductsPage(page);
+    await use(productsPage);
+  }
 });
 
 // Export the 'expect' assertion utility from base Playwright
