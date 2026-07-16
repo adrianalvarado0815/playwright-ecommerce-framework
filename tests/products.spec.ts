@@ -1,11 +1,15 @@
 import { test, expect } from './fixtures';
 
-test.describe('Products Catalogue Tests', () => {
-    test ('Should search for product successfully', async ({ productsPage }) => {
+test.describe('Products & Cart Flow Tests', () => {
+    test ('Should search for product successfully', async ({ productsPage, cartPage }) => {
+        const productToSearch = 'Blue Top';
+
         await productsPage.navigate();
 
-        await productsPage.searchProduct('t-shirt');
+        await productsPage.searchProduct(productToSearch);
+        await productsPage.addFirstPRoductToCart();
+        await expect(cartPage.firstProductLocator).toHaveText(productToSearch);
 
-        await expect(productsPage.title).toBeVisible();
+        //await expect(productsPage.title).toBeVisible();
     })
 });

@@ -1,11 +1,13 @@
 import { test as base } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
 import { ProductsPage } from '../pages/ProductsPage';
+import { CartPage } from '../pages/CartPage';
 
 // 1. Define the types for your custom fixtures
 type MyFixtures = {
   loginPage: LoginPage;
   productsPage: ProductsPage;
+  cartPage: CartPage;
   // Future page objects will be added here (e.g., productsPage: ProductsPage;)
 };
 
@@ -21,6 +23,11 @@ export const test = base.extend<MyFixtures>({
   productsPage: async({page}, use) => {
     const productsPage = new ProductsPage(page);
     await use(productsPage);
+  },
+
+  cartPage: async({page}, use) => {
+    const cartPage = new CartPage(page);
+    await use(cartPage);
   }
 });
 
